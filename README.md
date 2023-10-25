@@ -137,7 +137,9 @@ network={
   wep_key0="14332"
   wep_tx_keyidx=0
 }
+
 **wpa_supplicant -B -Dnl80211 -iwlan1 -c supplicant.conf**
+
 **dhclient -v wlan1**
 
 
@@ -160,6 +162,7 @@ network={
   psk="jasmine1"
 }
 **wpa_supplicant -B -Dnl80211 -iwlan1 -c supplicant.conf**
+
 **dhclient -v wlan1**
 
 
