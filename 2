@@ -1,0 +1,26 @@
+WPA
+====
+ctrl_interface=/var/run/wpa_supplicant
+update_config=1
+
+network={
+    ssid="YourWiFiNetworkName"
+    psk="YourWiFiPassword"
+    key_mgmt=WPA-PSK
+}
+
+
+
+WEP
+=======
+ctrl_interface=/var/run/wpa_supplicant
+update_config=1
+
+network={
+    ssid="YourWEPNetworkName"
+    key_mgmt=NONE
+    wep_key0="YourWEPKey"
+    wep_tx_keyidx=0
+}
+
+
