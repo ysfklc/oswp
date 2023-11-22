@@ -38,3 +38,32 @@ network={
     private_key_passwd="YourPrivateKeyPassword"
     ca_cert="/path/to/your/ca_certificate.pem"
 }
+
+WPA2-MGT
+network={
+    ssid="myenterprise"
+    scan_ssid=1
+    proto=RSN
+    key_mgmt=WPA-EAP
+    eap=tls
+    pairwise=CCMP TKIP
+    group=CCMP TKIP
+    cipher=AES TKIP
+    identity="user@example.com"
+    anonymous_identity="00-00-00-00-00-00"
+    ca_cert="ca.pem"
+    client_cert="client.pem"
+    private_key="key.pem"
+    private_key_passwd="password"
+}
+
+WPA2-PSK
+network={
+    ssid="mynetwork"
+    psk="mypassword"
+    proto=RSN
+    key_mgmt=WPA-PSK
+    pairwise=CCMP TKIP
+    group=CCMP TKIP
+    cipher=AES TKIP
+}
