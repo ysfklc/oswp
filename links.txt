@@ -3,3 +3,4 @@ https://github.com/drewlong/oswp_notes
 https://gist.github.com/aspyct/994b603aaefe5996ca331f107d6abb67
 https://systemweakness.com/defeating-wpa2-enterprise-peap-authentication-418829b8922c
 https://github.com/drewlong/oswp_notes
+https://github.com/brcyrr/OSWP/blob/main/0%20-%20Exam%20Roadmap%20%26%20Attack%20Map
