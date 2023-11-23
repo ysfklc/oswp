@@ -1,69 +1,113 @@
-WPA
-====
-ctrl_interface=/var/run/wpa_supplicant
-update_config=1
+ENC			CIPHER			AUTH
+OPN
+WEP			WEP				OPN
+WPA			CCMP			PSK
+WPA			TKIP			PSK
+WPA2		CCMP			PSK
+WPA2		CCMP			MGT
 
+
+
+----------------------------------------------------------------------------------
+supplicant.conf file for open system authentication (OPN):
 network={
-    ssid="YourWiFiNetworkName"
-    psk="YourWiFiPassword"
-    key_mgmt=WPA-PSK
-}
-
-
-
-WEP
-=======
-ctrl_interface=/var/run/wpa_supplicant
-update_config=1
-
-network={
-    ssid="YourWEPNetworkName"
+    ssid="YOUR_SSID"
     key_mgmt=NONE
-    wep_key0="YourWEPKey"
-    wep_tx_keyidx=0
+    auth_alg=OPEN
 }
-
-WPA-EAP
-=======
-ctrl_interface=/var/run/wpa_supplicant
-update_config=1
-
+OR
 network={
-    ssid="YourWiFiNetworkName"
-    key_mgmt=WPA-EAP
-    eap=TLS
-    identity="YourIdentity"
-    client_cert="/path/to/your/client/certificate.pem"
-    private_key="/path/to/your/private/key.pem"
-    private_key_passwd="YourPrivateKeyPassword"
-    ca_cert="/path/to/your/ca_certificate.pem"
+        ssid="Virtual WiFi"
+        key_mgmt=NONE
+        wep_key0="yellowgiraffe"
+        wep_tx_keyidx=0
 }
-
-WPA2-MGT
+----------------------------------------------------------------------------------
+supplicant.conf file for WEP encryption:
 network={
-    ssid="myenterprise"
+    ssid="YOUR_SSID"
     scan_ssid=1
-    proto=RSN
-    key_mgmt=WPA-EAP
-    eap=tls
-    pairwise=CCMP TKIP
-    group=CCMP TKIP
-    cipher=AES TKIP
-    identity="user@example.com"
-    anonymous_identity="00-00-00-00-00-00"
-    ca_cert="ca.pem"
-    client_cert="client.pem"
-    private_key="key.pem"
-    private_key_passwd="password"
+    key_mgmt=NONE
+    wep_tx_keyidx=0
+    wep_key0=YOUR_WEP_KEY
 }
-
-WPA2-PSK
+----------------------------------------------------------------------------------
+supplicant.conf file for encryption using WEP cipher and authentication with open system (OPN):
+network=
+{
+    ssid="YOUR_SSID"
+    psk="YOUR_PSK"
+    key_mgmt=NONE
+    auth_alg=OPEN
+    cipher=WEP104
+    cipher=WEP40
+}
+----------------------------------------------------------------------------------
+supplicant.conf file for WPA CCMP
 network={
-    ssid="mynetwork"
-    psk="mypassword"
-    proto=RSN
+    ssid="YOUR_SSID"
+    psk="YOUR_PSK"
+    proto=WPA
     key_mgmt=WPA-PSK
-    pairwise=CCMP TKIP
-    group=CCMP TKIP
-    cipher=AES TKIP
+    cipher=CCMP
+}
+OR
+network={
+  ssid="Virtual Wifi"
+  key_mgmt=WPA-PSK
+  psk="123456789"
+}
+----------------------------------------------------------------------------------
+supplicant.conf file for WPA TKIP
+network={
+    ssid="YOUR_SSID"
+    psk="YOUR_PSK"
+    proto=WPA
+    key_mgmt=WPA-PSK
+    cipher=TKIP
+}
+----------------------------------------------------------------------------------
+supplicant.conf file for WPA2 PSK
+network={
+    ssid="YOUR_SSID"
+    psk="YOUR_PSK"
+    proto=WPA2
+    key_mgmt=WPA-PSK
+    cipher=CCMP
+}
+----------------------------------------------------------------------------------
+supplicant.conf file for WPA2 MGT
+network={
+    ssid="YOUR_SSID"
+    proto=WPA2
+    key_mgmt=WPA-EAP
+    eap=TTLS
+    eap_fast_timeout=10
+    eap_identity="YOUR_IDENTITY"
+    eap_anonymous_identity="anonymous@example.com"
+    eap_phase2_auth=PAP
+    eap_phase2_id="user=YOUR_USERNAME, password=YOUR_PASSWORD"
+}
+OR 
+network={
+    ssid="YOUR_SSID"
+    proto=WPA2
+    key_mgmt=WPA-EAP
+    eap=PEAP
+    eap_fast_timeout=10
+    eap_identity="YOUR_IDENTITY"
+    eap_anonymous_identity="anonymous@example.com"
+    eap_phase2_auth=MSCHAPV2
+    eap_phase2_id="user=YOUR_USERNAME, domain=YOUR_DOMAIN"
+}
+OR
+network={
+    ssid="YOUR_SSID"
+	scan_ssid=1
+	key_mgmt=WPA-EAP
+	identity="domain\user"
+	password="YOUR_PASSWORD"
+	eap=PEAP
+	phase1="peaplabel=0"
+	phase2="auth=MSCHAPV2"
 }
