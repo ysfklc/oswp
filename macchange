@@ -1,0 +1,4 @@
+systemctl stop network-manager
+ip link set wlan0 down
+macchanger -m <mac_address> wlan0
+ip link set wlan0 up
