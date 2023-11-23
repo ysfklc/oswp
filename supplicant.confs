@@ -1,6 +1,7 @@
 ENC	CIPHER	AUTH
 OPN
 WEP	WEP	OPN
+WEP	WEP	SKA
 WPA	CCMP	PSK
 WPA	TKIP	PSK
 WPA2	CCMP	PSK
@@ -14,13 +15,6 @@ network={
     ssid="YOUR_SSID"
     key_mgmt=NONE
     auth_alg=OPEN
-}
-OR
-network={
-        ssid="Virtual WiFi"
-        key_mgmt=NONE
-        wep_key0="yellowgiraffe"
-        wep_tx_keyidx=0
 }
 ----------------------------------------------------------------------------------
 supplicant.conf file for WEP encryption:
@@ -41,6 +35,24 @@ network=
     auth_alg=OPEN
     cipher=WEP104
     cipher=WEP40
+}
+OR
+network={
+        ssid="Virtual WiFi"
+        key_mgmt=NONE
+        wep_key0="yellowgiraffe"
+        wep_tx_keyidx=0
+}
+----------------------------------------------------------------------------------
+supplicant.conf file for encryption using WEP SKA
+network={
+    ssid="YOUR_SSID"
+    scan_ssid=1
+    key_mgmt=NONE
+    auth_alg=OPEN
+    cipher=WEP104
+    wep_key0=0xYOUR_HEX_KEY
+    wep_key_type=SKA
 }
 ----------------------------------------------------------------------------------
 supplicant.conf file for WPA CCMP
