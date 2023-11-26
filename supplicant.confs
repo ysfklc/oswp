@@ -61,7 +61,6 @@ network={
     psk="YOUR_PSK"
     proto=WPA
     key_mgmt=WPA-PSK
-    cipher=CCMP
 }
 OR
 network={
@@ -76,7 +75,6 @@ network={
     psk="YOUR_PSK"
     proto=WPA
     key_mgmt=WPA-PSK
-    cipher=TKIP
 }
 ----------------------------------------------------------------------------------
 supplicant.conf file for WPA2 PSK
@@ -85,7 +83,6 @@ network={
     psk="YOUR_PSK"
     proto=WPA2
     key_mgmt=WPA-PSK
-    cipher=CCMP
 }
 ----------------------------------------------------------------------------------
 supplicant.conf file for WPA2 MGT
